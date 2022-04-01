@@ -24,7 +24,7 @@
 #include <doctest/doctest.h>
 
 #include <cstddef>
-#include <optional>
+#include <boost/optional.hpp>
 #include <thread>
 
 DOCTEST_TEST_SUITE(ASIO_GRPC_TEST_CPP_VERSION)
@@ -451,7 +451,7 @@ TEST_CASE_FIXTURE(test::GrpcClientServerTest, "yield_context bidirectional strea
 
 TEST_CASE_FIXTURE(test::GrpcClientServerTest, "RPC step after grpc_context stop")
 {
-    std::optional<bool> ok;
+    boost::optional<bool> ok;
     asio::spawn(get_executor(),
                 [&](asio::yield_context yield)
                 {
@@ -578,7 +578,7 @@ TEST_CASE_FIXTURE(test::GrpcContextTest, "cancel grpc::Alarm with cancellation_t
 TEST_CASE_FIXTURE(test::GrpcContextTest, "cancel grpc::Alarm with parallel_group")
 {
     std::array<std::size_t, 2> completion_order;
-    std::optional<test::ErrorCode> error_code;
+    boost::optional<test::ErrorCode> error_code;
     bool ok{true};
     grpc::Alarm alarm;
     asio::steady_timer timer{get_executor(), std::chrono::milliseconds(100)};

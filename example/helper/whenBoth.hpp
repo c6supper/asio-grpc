@@ -19,7 +19,7 @@
 
 #include <atomic>
 #include <cstddef>
-#include <optional>
+#include <boost/optional.hpp>
 #include <tuple>
 
 namespace example
@@ -29,9 +29,9 @@ namespace example
 template <class Result1, class Result2, class Init1, class Init2>
 agrpc::GrpcAwaitable<std::pair<Result1, Result2>> when_both(Init1&& init1, Init2&& init2)
 {
-    std::optional<boost::asio::async_result<agrpc::GrpcUseAwaitable, void()>::handler_type> completion_handler;
-    std::optional<Result1> result1;
-    std::optional<Result2> result2;
+    boost::optional<boost::asio::async_result<agrpc::GrpcUseAwaitable, void()>::handler_type> completion_handler;
+    boost::optional<Result1> result1;
+    boost::optional<Result2> result2;
     std::atomic_size_t count{};
     auto token = agrpc::GRPC_USE_AWAITABLE;
     co_await boost::asio::async_initiate<agrpc::GrpcUseAwaitable, void()>(

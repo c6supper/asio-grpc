@@ -118,7 +118,7 @@
 #include <iterator>
 #include <limits>
 #include <memory>
-#include <optional>
+#include <boost/optional.hpp>
 #include <string>
 #include <thread>
 #include <tuple>

@@ -20,7 +20,7 @@
 #include <agrpc/wait.hpp>
 #include <doctest/doctest.h>
 
-#include <optional>
+#include <boost/optional.hpp>
 
 DOCTEST_TEST_SUITE(ASIO_GRPC_TEST_CPP_VERSION)
 {
@@ -71,7 +71,7 @@ TEST_CASE_FIXTURE(test::GrpcContextTest, "AllocatorBinder constructor and member
 TEST_CASE_FIXTURE(test::GrpcContextTest, "bind_allocator with old async_completion")
 {
     auto completion_token = agrpc::bind_allocator(get_allocator(), test::NoOp{});
-    std::optional<decltype(get_allocator())> actual_allocator{};
+    boost::optional<decltype(get_allocator())> actual_allocator{};
     test::initiate_using_async_completion<decltype(completion_token), void()>(
         [&](auto&& ch)
         {

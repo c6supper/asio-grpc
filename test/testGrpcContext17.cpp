@@ -278,7 +278,7 @@ TEST_CASE_FIXTURE(test::GrpcContextTest, "experimental::deferred with Alarm")
 
 TEST_CASE_FIXTURE(test::GrpcContextTest, "asio::post a asio::steady_timer")
 {
-    std::optional<test::ErrorCode> error_code;
+    boost::optional<test::ErrorCode> error_code;
     asio::steady_timer timer{get_executor()};
     asio::post(get_executor(),
                [&]

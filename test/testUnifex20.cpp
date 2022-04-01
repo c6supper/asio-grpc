@@ -23,7 +23,7 @@
 #include <doctest/doctest.h>
 
 #include <cstddef>
-#include <optional>
+#include <boost/optional.hpp>
 #include <thread>
 
 DOCTEST_TEST_SUITE(ASIO_GRPC_TEST_CPP_VERSION)
@@ -57,7 +57,7 @@ TEST_CASE_FIXTURE(test::GrpcContextTest, "unifex GrpcExecutor::schedule")
                                       {
                                           is_invoked = true;
                                       }};
-    std::optional<unifex::connect_result_t<decltype(sender), decltype(receiver)>> operation_state;
+    boost::optional<unifex::connect_result_t<decltype(sender), decltype(receiver)>> operation_state;
     SUBCASE("connect")
     {
         operation_state.emplace(unifex::connect(sender, receiver));
@@ -210,7 +210,7 @@ TEST_CASE("unifex GrpcContext.stop() with pending GrpcSender operation")
 {
     bool is_invoked{false};
     unifex::new_thread_context ctx;
-    std::optional<agrpc::GrpcContext> grpc_context{std::make_unique<grpc::CompletionQueue>()};
+    boost::optional<agrpc::GrpcContext> grpc_context{std::make_unique<grpc::CompletionQueue>()};
     auto receiver = test::FunctionAsReceiver{[&](bool)
                                              {
                                                  is_invoked = true;

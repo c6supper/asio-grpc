@@ -28,7 +28,7 @@
 #include <grpcpp/server_builder.h>
 
 #include <iostream>
-#include <optional>
+#include <boost/optional.hpp>
 #include <thread>
 
 namespace asio = boost::asio;
@@ -37,7 +37,7 @@ struct ServerShutdown
 {
     grpc::Server& server;
     boost::asio::basic_signal_set<agrpc::GrpcContext::executor_type> signals;
-    std::optional<std::thread> shutdown_thread;
+    boost::optional<std::thread> shutdown_thread;
 
     ServerShutdown(grpc::Server& server, agrpc::GrpcContext& grpc_context)
         : server(server), signals(grpc_context, SIGINT, SIGTERM)

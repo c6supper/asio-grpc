@@ -26,8 +26,8 @@
 #include "agrpc/grpcContext.hpp"
 
 #include <atomic>
-#include <optional>
-#include <variant>
+#include <boost/optional.hpp>
+// #include <variant>
 
 AGRPC_NAMESPACE_BEGIN()
 
@@ -66,7 +66,7 @@ class RepeatedlyRequestStopContext
         this->reset();
     }
 
-    std::optional<detail::StopCallbackTypeT<Receiver&, StopFunction>> stop_callback;
+    boost::optional<detail::StopCallbackTypeT<Receiver&, StopFunction>> stop_callback;
     std::atomic<bool> stopped;
 };
 
@@ -132,7 +132,7 @@ class RepeatedlyRequestSender : public detail::SenderOf<>
 
             agrpc::GrpcContext& grpc_context;
             detail::CompressedPair<detail::RPCContextForRPCT<RPC>, Allocator> impl;
-            std::optional<detail::InplaceWithFunctionWrapper<
+            boost::optional<detail::InplaceWithFunctionWrapper<
                 detail::exec::connect_result_t<RequestHandlerSender, DeallocateRequestHandlerOperationReceiver>>>
                 operation_state;
 

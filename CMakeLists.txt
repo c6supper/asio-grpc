@@ -4,7 +4,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+# http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -29,13 +29,15 @@ option(ASIO_GRPC_USE_BOOST_CONTAINER "Use Boost.Container instead of <memory_res
 option(ASIO_GRPC_BUILD_TESTS "Build tests and examples" off)
 option(ASIO_GRPC_DISCOVER_TESTS "Discover tests for ctest" off)
 option(ASIO_GRPC_ENABLE_CPP20_TESTS_AND_EXAMPLES
-       "When tests and/or example builds are enabled then also create CMake targets for C++20" on)
+    "When tests and/or example builds are enabled then also create CMake targets for C++20" off)
+
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     option(
         ASIO_GRPC_ENABLE_IO_URING_EXAMPLES
         "When tests and/or example builds are enabled then also create CMake targets for examples that depend on io_uring"
         on)
 endif()
+
 option(ASIO_GRPC_TEST_COVERAGE "Compile tests with --coverage" off)
 set(ASIO_GRPC_COVERAGE_OUTPUT_FILE
     "${CMAKE_CURRENT_BINARY_DIR}/sonarqube-coverage.xml"
@@ -50,17 +52,21 @@ if(ASIO_GRPC_BUILD_TESTS)
 
     find_package(protobuf)
     find_package(gRPC)
+
     if(ASIO_GRPC_USE_BOOST_CONTAINER)
         find_package(Boost REQUIRED COMPONENTS coroutine thread filesystem container)
     else()
         find_package(Boost REQUIRED COMPONENTS coroutine thread filesystem)
     endif()
+
     find_package(asio)
     find_package(unifex)
+
     if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
         include(FindPkgConfig)
         pkg_check_modules(liburing IMPORTED_TARGET GLOBAL liburing)
     endif()
+
     include(AsioGrpcCompileOptions)
     include(AsioGrpcCheckBoostVersion)
     include(AsioGrpcInstallGitHooks)

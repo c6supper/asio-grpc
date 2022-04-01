@@ -26,7 +26,7 @@
 #include "agrpc/detail/utility.hpp"
 #include "agrpc/grpcContext.hpp"
 
-#include <optional>
+#include <boost/optional.hpp>
 
 AGRPC_NAMESPACE_BEGIN()
 
@@ -45,7 +45,7 @@ class GrpcSender : public detail::SenderOf<bool>
             detail::IS_STOP_EVER_POSSIBLE_V<detail::exec::stop_token_type_t<Receiver&>>;
 
         using StopCallbackLifetime =
-            std::conditional_t<HAS_STOP_CALLBACK, std::optional<detail::StopCallbackTypeT<Receiver&, StopFunction>>,
+            std::conditional_t<HAS_STOP_CALLBACK, boost::optional<detail::StopCallbackTypeT<Receiver&, StopFunction>>,
                                detail::Empty>;
 
       public:

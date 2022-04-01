@@ -23,7 +23,7 @@
 #include <doctest/doctest.h>
 
 #include <cstddef>
-#include <optional>
+#include <boost/optional.hpp>
 #include <thread>
 
 DOCTEST_TEST_SUITE(ASIO_GRPC_TEST_CPP_VERSION)
@@ -76,7 +76,7 @@ TEST_CASE_FIXTURE(GrpcRepeatedlyRequestTest, "yield_context repeatedly_request c
 {
     bool is_shutdown{false};
     auto request_count{0};
-    std::optional<std::thread> server_shutdown_thread;
+    boost::optional<std::thread> server_shutdown_thread;
     this->test(
         &test::v1::Test::AsyncService::RequestClientStreaming, service,
         [&](grpc::ServerContext&, grpc::ServerAsyncReader<test::msg::Response, test::msg::Request>& reader,
@@ -192,7 +192,7 @@ TEST_CASE_FIXTURE(GrpcRepeatedlyRequestTest, "repeatedly_request tracks work of 
                                       io_context.run();
                                       order = 1 == order ? 2 : 0;
                                   }};
-    std::optional<std::thread> server_shutdown_thread;
+    boost::optional<std::thread> server_shutdown_thread;
     asio::post(grpc_context,
                [&]
                {

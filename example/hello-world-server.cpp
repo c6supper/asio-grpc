@@ -21,7 +21,7 @@
 #include <grpcpp/server.h>
 #include <grpcpp/server_builder.h>
 
-#include <optional>
+#include <boost/optional.hpp>
 #include <thread>
 
 int main(int argc, const char** argv)
